@@ -100,6 +100,7 @@ endef
 
 DEVICE_VARS += GRUB2_VARIANT
 define Device/Default
+  PROFILES := Default
   ARTIFACT/image.iso := grub-config iso | iso
   IMAGE/combined.img := grub-config pc | combined | grub-install | append-metadata
   IMAGE/combined.img.gz := grub-config pc | combined | grub-install | gzip | append-metadata
