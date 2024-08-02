@@ -661,6 +661,23 @@ endef
 
 $(eval $(call KernelPackage,hwmon-tps23861))
 
+
+define KernelPackage/hwmon-tps53679
+  TITLE:=TI TPS53679 and compatible monitoring support
+  KCONFIG:=CONFIG_SENSORS_TPS53679
+  FILES:=$(LINUX_DIR)/drivers/hwmon/pmbus/tps53679.ko
+  AUTOLOAD:=$(call AutoProbe,tps53679)
+  $(call AddDepends/hwmon,+kmod-pmbus-core)
+endef
+
+define KernelPackage/hwmon-tps53679/description
+  Kernel module for the Texas Instruments TPS53647,
+  TPS53667, TPS53676, TPS53679, TPS53681, and TPS53688 chips.
+endef
+
+$(eval $(call KernelPackage,hwmon-tps53679))
+
+
 define KernelPackage/hwmon-vid
   TITLE:=VID/VRM/VRD voltage conversion module.
   KCONFIG:=CONFIG_HWMON_VID
