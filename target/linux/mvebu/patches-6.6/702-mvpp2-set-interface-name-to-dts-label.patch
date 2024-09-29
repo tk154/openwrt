@@ -1,0 +1,37 @@
+From 6c2e9ec90c2430665b65c5ce87fcbd399b31593f Mon Sep 17 00:00:00 2001
+From: Til Kaiser <mail@tk154.de>
+Date: Sat, 5 Oct 2024 14:17:35 +0200
+Subject: [PATCH] mvpp2: set interface name to dts label
+
+This patch allows the mvpp2 driver to read the label property from
+the device tree for a network port, similar to how DSA handles naming.
+That makes it possible to properly label the device's network ports
+instead of using the default ascending eth* naming convention.
+The default name remains unchanged if the device tree has no
+label property defined.
+
+Signed-off-by: Til Kaiser <mail@tk154.de>
+---
+ drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+--- a/drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c
++++ b/drivers/net/ethernet/marvell/mvpp2/mvpp2_main.c
+@@ -6722,6 +6722,7 @@ static int mvpp2_port_probe(struct platf
+ 	netdev_features_t features;
+ 	struct net_device *dev;
+ 	struct phylink *phylink;
++	const char *name = of_get_property(port_node, "label", NULL);
+ 	char *mac_from = "";
+ 	unsigned int ntxqs, nrxqs, thread;
+ 	unsigned long flags = 0;
+@@ -6777,6 +6778,9 @@ static int mvpp2_port_probe(struct platf
+ 		goto err_free_netdev;
+ 	}
+ 
++	if (name)
++		strscpy(dev->name, name, sizeof(dev->name));
++
+ 	dev->tx_queue_len = MVPP2_MAX_TXD_MAX;
+ 	dev->watchdog_timeo = 5 * HZ;
+ 	dev->netdev_ops = &mvpp2_netdev_ops;
