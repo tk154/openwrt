@@ -1,0 +1,28 @@
+. /lib/functions.sh
+
+set_mlxsw_labels() {
+	local dir
+	local driver
+	local label
+	local netdev
+
+	for dir in /sys/class/net/eth*; do
+		driver="$(readlink $dir/device/driver)"
+		[ "${driver##*/}" = "mlxsw_spectrum" ] || continue
+
+		read -r label < "$dir/phys_port_name"
+		netdev="${dir##*/}"
+
+		ip link set "$netdev" name "sw$label"
+	done
+}
+
+set_netdev_labels() {
+	case "$(board_name)" in
+	mellanox-technologies-ltd-msn*)
+		set_mlxsw_labels
+		;;
+	esac
+}
+
+boot_hook_add preinit_main set_netdev_labels
