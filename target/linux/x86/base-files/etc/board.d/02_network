@@ -34,6 +34,19 @@ cisco-mx100-hw)
 dell-emc-edge620)
 	ucidef_set_interfaces_lan_wan "eth0 eth1 eth2 eth3 eth7" "eth6"
 	;;
+mellanox-technologies-ltd-msn2100)
+	ucidef_set_network_device_path "mgmt" "pci0000:00/0000:00:14.0"
+	ucidef_set_interface_lan "mgmt"
+	;;
+mellanox-technologies-ltd-msn2700)
+	ucidef_set_network_device_path "mgmt0" "pci0000:00/0000:00:19.0"
+	ucidef_set_network_device_path "mgmt1" "pci0000:00/0000:00:1c.6/0000:06:00.0"
+	ucidef_set_interface_lan "mgmt0 mgmt1"
+	;;
+mellanox-technologies-ltd-msn3700)
+	ucidef_set_network_device_path "mgmt" "pci0000:00/0000:00:1c.7/0000:09:00.0"
+	ucidef_set_interface_lan "mgmt"
+	;;
 pc-engines-apu1|pc-engines-apu2|pc-engines-apu3)
 	ucidef_set_interfaces_lan_wan "eth1 eth2" "eth0"
 	;;
