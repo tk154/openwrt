@@ -1018,7 +1018,7 @@ define KernelPackage/e1000e
   DEPENDS:=@PCIE_SUPPORT +kmod-ptp
   KCONFIG:=CONFIG_E1000E
   FILES:=$(LINUX_DIR)/drivers/net/ethernet/intel/e1000e/e1000e.ko
-  AUTOLOAD:=$(call AutoProbe,e1000e)
+  AUTOLOAD:=$(call AutoLoad,35,e1000e,1)
   MODPARAMS.e1000e:= \
     IntMode=1 \
     InterruptThrottleRate=4,4,4,4,4,4,4,4
@@ -1687,7 +1687,7 @@ define KernelPackage/mlxsw-spectrum
   CONFIG_MLXSW_SPECTRUM_DCB=y \
   CONFIG_NET_SWITCHDEV=y \
   CONFIG_DCB=y
-  AUTOLOAD:=$(call AutoProbe,mlxsw_spectrum)
+  AUTOLOAD:=$(call AutoLoad,36,mlxsw_spectrum,1)
 endef
 
 define KernelPackage/mlxsw-spectrum/description
