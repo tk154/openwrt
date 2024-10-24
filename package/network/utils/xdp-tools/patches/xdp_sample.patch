@@ -1,0 +1,12 @@
+diff --git a/lib/util/xdp_sample.c b/lib/util/xdp_sample.c
+index 33c9f58..77c74d6 100644
+--- a/lib/util/xdp_sample.c
++++ b/lib/util/xdp_sample.c
+@@ -21,7 +21,6 @@
+ #include <arpa/inet.h>
+ #include <sys/ioctl.h>
+ #include <bpf/libbpf.h>
+-#include <sys/sysinfo.h>
+ #include <sys/timerfd.h>
+ #include <sys/utsname.h>
+ #include <linux/limits.h>
