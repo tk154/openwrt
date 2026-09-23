@@ -1157,6 +1157,13 @@
 			"description": "If bridge parameter is set, the WDS STA interface will be added to the same bridge by default",
 			"type": "boolean"
 		},
+		"apup": {
+			"type": "boolean"
+		},
+		"apup_peer_ifname_prefix": {
+			"description": "Interface name prefix for APuP peer interfaces",
+			"type": "string"
+		},
 		"wnm_sleep_mode": {
 			"description": "WNM-Sleep Mode (extended sleep mode for stations)",
 			"type": "boolean"
