@@ -164,7 +164,7 @@ Hotfix-by: Sebastian Gottschall https://github.com/mirror/dd-wrt/commit/0c3001a6
  int hostapd_sta_add(struct hostapd_data *hapd,
 --- /dev/null
 +++ b/src/ap/apup.c
-@@ -0,0 +1,177 @@
+@@ -0,0 +1,183 @@
 +/*
 + * hostapd / APuP Access Point Micro Peering
 + *
@@ -328,6 +328,12 @@ Hotfix-by: Sebastian Gottschall https://github.com/mirror/dd-wrt/commit/0c3001a6
 +	// last param 1 means add 0 means remove
 +	int mRet = hostapd_set_wds_sta(
 +	            hapd, mIfname, mgmt->bssid, sta_ret->aid, 1);
++
++	if (mRet == 0) {
++		sta_ret->flags |= WLAN_STA_WDS;
++		os_free(sta_ret->ifname_wds);
++		sta_ret->ifname_wds = os_strdup(mIfname);
++	}
 +
 +	wpa_printf(MSG_INFO,
 +	           "apup_process_beacon(...) Added APuP peer at %s with flags: %d,"
