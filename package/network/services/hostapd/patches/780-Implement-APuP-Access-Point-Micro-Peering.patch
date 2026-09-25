@@ -164,7 +164,7 @@ Hotfix-by: Sebastian Gottschall https://github.com/mirror/dd-wrt/commit/0c3001a6
  int hostapd_sta_add(struct hostapd_data *hapd,
 --- /dev/null
 +++ b/src/ap/apup.c
-@@ -0,0 +1,176 @@
+@@ -0,0 +1,177 @@
 +/*
 + * hostapd / APuP Access Point Micro Peering
 + *
@@ -262,7 +262,8 @@ Hotfix-by: Sebastian Gottschall https://github.com/mirror/dd-wrt/commit/0c3001a6
 +
 +	/* Whithout this flag copy_sta_[v]ht_capab will disable [V]HT
 +	 * capabilities even if available */
-+	if (elems->ht_capabilities || elems->vht_capabilities)
++	if (elems->ht_capabilities || elems->vht_capabilities ||
++	    elems->he_capabilities || elems->eht_capabilities)
 +		sta_ret->flags |= WLAN_STA_WMM;
 +
 +	copy_sta_ht_capab(hapd, sta_ret, elems->ht_capabilities);
